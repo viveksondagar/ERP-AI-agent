@@ -27,16 +27,23 @@ from analytics import (
 # ENVIRONMENT
 # ---------------------------------------------------------
 
+import os
+from dotenv import load_dotenv
+
 load_dotenv()
 
-API_KEY = os.getenv("OPENAI_API_KEY")
-MODEL = os.getenv("OPENAI_MODEL", "gpt-5.6-luna")
+# Get API key from Streamlit Cloud Secrets if available,
+# otherwise use the local .env file.
+try:
+    import streamlit as st
+    API_KEY = st.secrets.get("OPENAI_API_KEY")
+    MODEL = st.secrets.get("OPENAI_MODEL", os.getenv("OPENAI_MODEL", "gpt-5.6-luna"))
+except Exception:
+    API_KEY = os.getenv("OPENAI_API_KEY")
+    MODEL = os.getenv("OPENAI_MODEL", "gpt-5.6-luna")
 
 if not API_KEY:
-    raise RuntimeError(
-        "OPENAI_API_KEY is missing from the .env file."
-    )
-
+    raise RuntimeError("OPENAI_API_KEY is missing.")
 
 # ---------------------------------------------------------
 # OPENAI CLIENT
