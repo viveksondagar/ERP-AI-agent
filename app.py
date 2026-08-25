@@ -310,7 +310,7 @@ if (
 # EXTRACT HEALTH DATA
 # ============================================================
 
-health = executive_data.get(
+health = executive_result.get(
     "health",
     {}
 )
@@ -410,7 +410,7 @@ low_margin_percentage = health.get(
 # REVENUE TREND
 # ============================================================
 
-revenue_trend = executive_data.get(
+revenue_trend = executive_result.get(
     "revenue_trend",
     {}
 )
@@ -674,7 +674,7 @@ with inventory_col:
         "🚨 Critical Inventory Risks"
     )
 
-    cross_domain_risks = executive_data.get(
+    cross_domain_risks = executive_result.get(
         "cross_domain_risks",
         []
     )
@@ -803,7 +803,7 @@ with risk_col:
         "⚠️ Priority Alerts"
     )
 
-    alerts = executive_data.get(
+    alerts = executive_result.get(
         "priority_alerts",
         []
     )
@@ -868,7 +868,7 @@ st.header(
 )
 
 
-reorder_priorities = executive_data.get(
+reorder_priorities = executive_result.get(
     "reorder_priorities",
     []
 )
@@ -956,7 +956,7 @@ st.header(
 )
 
 
-profitability_gaps = executive_data.get(
+profitability_gaps = executive_result.get(
     "profitability_gaps",
     []
 )
@@ -1036,7 +1036,7 @@ st.header(
 
 
 recommendations = generate_recommendations(
-    executive_data
+    executive_result
 )
 
 
