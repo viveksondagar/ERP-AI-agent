@@ -286,42 +286,25 @@ with st.spinner(
 # VALIDATE EXECUTIVE DATA
 # ============================================================
 
+# ============================================================
+# VALIDATE EXECUTIVE DATA
+# ============================================================
+
 if (
     not isinstance(executive_result, dict)
     or executive_result.get("error")
 ):
 
-    # Get the actual error returned by execute_tool()
-    if isinstance(executive_result, dict):
+    st.error("Unable to load executive ERP data.")
 
-        error_message = executive_result.get(
-            "message",
-            executive_result.get(
-                "error",
-                "Unknown error"
-            )
-        )
+    st.subheader("Debug Information")
 
-    else:
-
-        error_message = str(executive_result)
-
-    # Write the actual error to Streamlit Cloud logs
-    print(
-        f"[EXECUTIVE DATA ERROR] {error_message}"
-    )
-
-    # Keep the user-facing message clean
-    st.error(
-        "Unable to load executive ERP data."
+    st.code(
+        str(executive_result),
+        language="text"
     )
 
     st.stop()
-executive_data = executive_result.get(
-    "data",
-    {}
-)
-
 
 # ============================================================
 # EXTRACT HEALTH DATA
